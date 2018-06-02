@@ -19,7 +19,6 @@ public class Itrend implements Filter {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<Double> calculate(List<Double> data) {
         int count = data.size();
 

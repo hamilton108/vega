@@ -18,7 +18,6 @@ public class SuperSmoother implements Filter {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<Double> calculate(List<Double> data) {
         List<Double> result = new ArrayList<Double>();
 

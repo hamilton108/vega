@@ -53,7 +53,6 @@ public class RoofingFilter implements Filter {
 
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<Double> calculate(List<Double> data) {
 
         double f1 = 0.707 * Math.PI / highPassPeriod;
