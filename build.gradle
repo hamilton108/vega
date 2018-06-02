@@ -2,7 +2,7 @@ apply plugin: 'java'
 
 apply from: '../gradlecommon/depversions.gradle'
 
-group = 'uxmal108'
+group = 'hamilton108'
 
 version = '1.2'
 
@@ -10,36 +10,11 @@ ext.parentDist = '/home/rcs/opt/java/harborview/dist'
 
 repositories {
     mavenCentral()
-    maven {
-        url 'http://clojars.org/repo'
-    }
 }
 
-sourceSets {
-    main {
-        java {
-            srcDir "src/java"
-        }
-        resources {
-            srcDir "src/resources"
-        }
-        output.classesDir = 'build/classes'
-    }
-    test {
-        java {
-            srcDir "test/java"
-        }
-        resources {
-            srcDir "test/resources"
-        }
-    }
-}
 
 dependencies {
     compile project(':oahu')
-
-    //------------------- Clojure -------------------
-    compile "org.clojure:clojure:$clojureVersion"
 
     //------------------- Colt -------------------
     runtime "colt:colt:$coltVersion"
@@ -60,21 +35,3 @@ String clazzPath() {
     runt.join(" ")
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': "harborview.webapp"
-        attributes 'Class-Path': clazzPath()
-    }
-    from ("target/classes") include "**/*.class"
-}
-
-buildscript {
-    repositories {
-        mavenLocal()
-    }
-    dependencies {
-        classpath group: 'rcstadheim', name: 'palenque',
-                version: '1.0'
-    }
-}
-apply plugin: 'rcstadheim.palenque'

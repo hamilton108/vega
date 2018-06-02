@@ -1,6 +1,6 @@
 package vega.filters.ehlers;
 
-import clojure.lang.AFn;
+import vega.filters.Filter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,19 +9,17 @@ import java.util.List;
  * Created by rcs on 14.09.17.
  *
  */
-public class SuperSmoother extends AFn {
+public class SuperSmoother implements Filter {
 
     private int cyclePeriod;
 
     public SuperSmoother(int cyclePeriod) {
         this.cyclePeriod = cyclePeriod;
     }
+
     @Override
     @SuppressWarnings("unchecked")
-    public Object invoke(Object data) {
-
-        List<Double> datax = (List<Double>)data;
-
+    public List<Double> calculate(List<Double> data) {
         List<Double> result = new ArrayList<Double>();
 
         double twoPoleFactor = 1.414;
@@ -36,14 +34,14 @@ public class SuperSmoother extends AFn {
 
         double c1 = 1 - c2 - c3;
 
-        result.add(datax.get(0));
+        result.add(data.get(0));
 
-        result.add(datax.get(1));
+        result.add(data.get(1));
 
-        for (int i = 2; i<datax.size(); ++i) {
+        for (int i = 2; i<data.size(); ++i) {
 
-            double close = datax.get(i);
-            double close_1 = datax.get(i-1);
+            double close = data.get(i);
+            double close_1 = data.get(i-1);
             double filt_1 = result.get(i-1);
             double filt_2 = result.get(i-2);
             double filt = (0.5*c1*(close + close_1)) + (c2*filt_1) + (c3*filt_2);
@@ -53,5 +51,6 @@ public class SuperSmoother extends AFn {
 
         return result;
     }
+
 }
 

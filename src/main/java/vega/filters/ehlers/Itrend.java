@@ -1,7 +1,7 @@
 package vega.filters.ehlers;
 
-import clojure.lang.AFn;
 import vega.filters.Common;
+import vega.filters.Filter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  * Created by rcs on 03.06.15.
  *
  */
-public class Itrend extends AFn {
+public class Itrend implements Filter {
 
     private double alpha;
 
@@ -20,16 +20,15 @@ public class Itrend extends AFn {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Object invoke(Object data) {
-        List<Double> datax = (List<Double>)data;
-        int count = datax.size();
+    public List<Double> calculate(List<Double> data) {
+        int count = data.size();
 
         List<Double> result = new ArrayList<Double>();
 
         for (int i=0; i<8; ++i) {
-            double a = datax.get(i);
-            double b = 2 * datax.get(i+1);
-            double c = datax.get(i+2);
+            double a = data.get(i);
+            double b = 2 * data.get(i+1);
+            double c = data.get(i+2);
 
             result.add(0.25 *(a+b+c));
         }
@@ -45,9 +44,9 @@ public class Itrend extends AFn {
         double v2 = result.get(6);
 
         for (int i=8; i<count; ++i) {
-            double a = datax.get(i-2);
-            double b = datax.get(i-1);
-            double c = datax.get(i);
+            double a = data.get(i-2);
+            double b = data.get(i-1);
+            double c = data.get(i);
 
             double posval = (f1*c) + (f2*b) + (2.0*f4*v1);
 

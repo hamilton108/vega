@@ -1,8 +1,8 @@
 package vega.filters.ehlers;
 
-import clojure.lang.AFn;
 import oahu.functional.Func5;
 import vega.filters.Common;
+import vega.filters.Filter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * Created by rcs on 03.06.15.
  *
  */
-public class CyberCycle extends AFn {
+public class CyberCycle implements Filter {
 
     private double alpha;
 
@@ -21,10 +21,9 @@ public class CyberCycle extends AFn {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public Object invoke(Object data) {
+    public List<Double> calculate(List<Double> data) {
 
-        List<Double> datax = (List<Double>)data;
+        //List<Double> datax = (List<Double>)data;
         //List<Double> smooth = Common.calcSmooth(datax);
         List<Double> result = new ArrayList<>();
 
@@ -38,8 +37,8 @@ public class CyberCycle extends AFn {
         double f22 = f2 * f2;
 
         for (int i = 1; i < 20; ++i) {
-            double resultValue = ave(datax.get(i-1),
-                                     datax.get(i),
+            double resultValue = ave(data.get(i-1),
+                                     data.get(i),
                                      curHead,
                                      f1,
                                      f2);
@@ -52,10 +51,10 @@ public class CyberCycle extends AFn {
 
         Func5<Double,Double,Double,Double,Double,Double> ccFn = createCalcCycleFn(f12,f2,f22);
 
-        for (int i = 20; i < datax.size(); ++i) {
-            double c = datax.get(i-2);
-            double d = datax.get(i-1);
-            double e = datax.get(i);
+        for (int i = 20; i < data.size(); ++i) {
+            double c = data.get(i-2);
+            double d = data.get(i-1);
+            double e = data.get(i);
             double cycleVal = ccFn.apply(a,b,c,d,e);
             result.add(cycleVal);
             a = b;

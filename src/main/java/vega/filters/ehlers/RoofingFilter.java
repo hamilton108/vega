@@ -1,12 +1,12 @@
 package vega.filters.ehlers;
 
-import clojure.lang.AFn;
+import vega.filters.Filter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class RoofingFilter extends AFn {
+public class RoofingFilter implements Filter {
 
     private int highPassPeriod = 48;
     private int lowPassPeriod = 10;
@@ -54,7 +54,7 @@ public class RoofingFilter extends AFn {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Object invoke(Object data) {
+    public List<Double> calculate(List<Double> data) {
 
         double f1 = 0.707 * Math.PI / highPassPeriod;
 
@@ -127,4 +127,5 @@ public class RoofingFilter extends AFn {
         return result;
         // return smooth.invoke(result);
     }
+
 }
