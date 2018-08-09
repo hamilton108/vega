@@ -17,7 +17,11 @@ dependencies {
     compile project(':oahu')
 
     //------------------- Colt -------------------
-    runtime "colt:colt:$coltVersion"
+    compile "colt:colt:$coltVersion"// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+
+    //------------------- Testing -------------------
+    testCompile "org.junit.jupiter:junit-jupiter-api:$jupiterVersion"
+
 }
 
 ext.myLibName = "vega-${version}.jar"
