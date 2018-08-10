@@ -34,13 +34,16 @@ public class BlackScholes implements OptionCalculator {
 
     @Override
     public double ivCall(double spot, double strike, double yearsExpiry, double optionPrice) {
-        OptionPricing optionPriceFn = new DefaultOptionPricing(OptionType.CALL, spot, strike, yearsExpiry);
-        return 0;
+        BinarySearch binarySearch = new BinarySearch();
+        OptionPricing fn = new DefaultOptionPricing(OptionType.CALL, spot, strike, yearsExpiry);
+        return binarySearch.find(fn, 0.4, optionPrice, 0.05);
     }
 
     @Override
     public double ivPut(double spot, double strike, double yearsExpiry, double optionPrice) {
-        return 0;
+        BinarySearch binarySearch = new BinarySearch();
+        OptionPricing fn = new DefaultOptionPricing(OptionType.PUT, spot, strike, yearsExpiry);
+        return binarySearch.find(fn, 0.4, optionPrice, 0.05);
     }
 
     @Override

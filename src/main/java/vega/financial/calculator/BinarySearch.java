@@ -37,7 +37,7 @@ public class BinarySearch {
             if (counter >= maxIterations) {
                 throw new BinarySearchException(String.format("Max iterations (%d) reached", maxIterations));
             }
-            if (mid < target) {
+            if (result < target) {
                 lo = mid;
             }
             else {
