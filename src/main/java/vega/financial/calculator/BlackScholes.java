@@ -3,10 +3,13 @@ package vega.financial.calculator;
 import static oahu.financial.Derivative.OptionType;
 
 import oahu.exceptions.BinarySearchException;
+import oahu.financial.Derivative;
 import oahu.financial.DerivativePrice;
 import oahu.financial.OptionCalculator;
 
 public class BlackScholes implements OptionCalculator {
+    double daysInAYear = 365.0;
+
     @Override
     public double delta(DerivativePrice d) {
         return 0;
@@ -29,7 +32,16 @@ public class BlackScholes implements OptionCalculator {
 
     @Override
     public double iv(DerivativePrice d, int priceType) {
-        return 0;
+        double price = priceType == Derivative.BUY ? d.getBuy() : d.getSell();
+        double tm = d.getDerivative().getDays() / daysInAYear;
+        OptionPricing fn = new DefaultOptionPricing(
+                d.getDerivative().getOpType(),
+                d.getStockPrice().getCls(),
+                d.getDerivative().getX(),
+                tm);
+
+        BinarySearch binarySearch = new BinarySearch();
+        return binarySearch.find(fn, 0.4, price, 0.05);
     }
 
     @Override
