@@ -48,7 +48,7 @@ public class DefaultOptionPricing implements OptionPricing {
     }
 
     @Override
-    public double apply(double sigma) {
-        return apply(_spot,_x,_t, sigma);
+    public double apply(double value) {
+        return apply(_spot,_x,_t, value);
     }
 }
