@@ -1,21 +1,37 @@
 package vega.financial.calculator;
 
+import org.assertj.core.api.Assertions;
 import oahu.financial.Derivative;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.assertj.core.data.Offset;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringRunner;
 
+@RunWith(SpringRunner.class)
 public class TestBinarySearch {
+
     @Test
-    void testFindBounds() {
+    public void testFindBounds() {
         BinarySearch binarySearch = new BinarySearch();
         OptionPricing pricing = new DefaultOptionPricing(Derivative.OptionType.CALL, 100, 100, 0.5);
         BinarySearchBounds bounds = binarySearch.findBounds(pricing, 0.4, 12.0);
-        assertEquals(0, bounds.getStart(), 0.1, "Bounds start value");
-        assertEquals(0.4, bounds.getEnd(), 0.1, "Bounds end value");
+        Assertions.assertThat(bounds.getStart()).isCloseTo(0, Offset.offset(0.1));
+        Assertions.assertThat(bounds.getEnd()).isCloseTo(0.4, Offset.offset(0.1));
         BinarySearchBounds bounds2 = binarySearch.findBounds(pricing, 0.1, 12.0);
-        assertEquals(0.1, bounds2.getStart(), 0.1, "Bounds 2 start value");
-        assertEquals(0.4, bounds2.getEnd(), 0.1, "Bounds 2 end value");
     }
+
+    @Test
+    public void testBinarySearchPut() {
+        BinarySearch binarySearch = new BinarySearch();
+        OptionPricing pricing = new DefaultOptionPricing(Derivative.OptionType.PUT, 100, 100, 0.5);
+        double result = binarySearch.find(pricing,0.4, 12,0.1);
+        Assertions.assertThat(result).isCloseTo(0.48, Offset.offset(0.1));
+    }
+}
+
+/*
+public class TestBinarySearch {
+
     @Test
     void testBinarySearchCall() {
         BinarySearch binarySearch = new BinarySearch();
@@ -23,11 +39,5 @@ public class TestBinarySearch {
         double result = binarySearch.find(pricing,0.4, 12,0.1);
         assertEquals(0.39, result, 0.1, "Binary search call implied volatility");
     }
-    @Test
-    void testBinarySearchPut() {
-        BinarySearch binarySearch = new BinarySearch();
-        OptionPricing pricing = new DefaultOptionPricing(Derivative.OptionType.PUT, 100, 100, 0.5);
-        double result = binarySearch.find(pricing,0.4, 12,0.1);
-        assertEquals(0.48, result, 0.1, "Binary search put implied volatility");
-    }
 }
+*/

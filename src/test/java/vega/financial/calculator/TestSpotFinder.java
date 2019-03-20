@@ -1,10 +1,16 @@
 package vega.financial.calculator;
 
 import oahu.financial.Derivative;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.assertj.core.data.Offset;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringRunner;
 
+import org.assertj.core.api.Assertions;
+
+@RunWith(SpringRunner.class)
 public class TestSpotFinder {
+
     @Test
     public void testSpotForCallPrice() {
         testSpotFinder(Derivative.OptionType.CALL, 107.53, "SpotFinder Call price");
@@ -20,6 +26,6 @@ public class TestSpotFinder {
         SpotFinder spotFinder = new SpotFinder(optionPricing,100,0.5,0.2);
         BinarySearch binarySearch = new BinarySearch();
         double result = binarySearch.find(spotFinder, 100, 12, 0.05);
-        assertEquals(v, result, 0.15, msg);
+        Assertions.assertThat(result).describedAs(msg).isCloseTo(v, Offset.offset(0.15));
     }
 }

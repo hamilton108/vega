@@ -1,22 +1,27 @@
 package vega.financial.calculator;
 
 import oahu.financial.Derivative;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.assertj.core.api.Assertions;
+import org.assertj.core.data.Offset;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringRunner;
 
-class TestOptionPricing {
+@RunWith(SpringRunner.class)
+public class TestOptionPricing {
 
     @Test
-    void testCallPrice() {
+    public void testCallPrice() {
         OptionPricing optionPricing = new DefaultOptionPricing(Derivative.OptionType.CALL);
         double call = optionPricing.apply(100,100,0.5,0.2);
-        assertEquals(6.878, call, 0.1,"Call price");
+        Assertions.assertThat(call).isCloseTo(6.878, Offset.offset(0.1));
     }
 
     @Test
-    void testPutPrice() {
+    public void testPutPrice() {
         OptionPricing optionPricing = new DefaultOptionPricing(Derivative.OptionType.PUT);
         double put = optionPricing.apply(100,100,0.5,0.2);
-        assertEquals(4.415, put, 0.1,"Call price");
+        Assertions.assertThat(put).isCloseTo(4.415, Offset.offset(0.1));
     }
 }
+
