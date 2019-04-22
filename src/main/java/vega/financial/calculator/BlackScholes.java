@@ -1,12 +1,13 @@
 package vega.financial.calculator;
 
-import static oahu.financial.Derivative.OptionType;
-
-import oahu.exceptions.BinarySearchException;
 import oahu.financial.Derivative;
 import oahu.financial.DerivativePrice;
 import oahu.financial.OptionCalculator;
+import org.springframework.stereotype.Component;
 
+import static oahu.financial.Derivative.OptionType;
+
+@Component
 public class BlackScholes implements OptionCalculator {
     double daysInAYear = 365.0;
 

@@ -15,6 +15,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
     compile project(':oahu')
     compile "colt:colt:$coltVersion"// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
     testCompile "org.springframework.boot:spring-boot-starter-test"
