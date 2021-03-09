@@ -1,6 +1,6 @@
 package vega.financial.calculator;
 
-import static oahu.financial.Derivative.OptionType;
+import static oahu.financial.StockOption.OptionType;
 import cern.jet.random.Normal;
 import cern.jet.random.engine.MersenneTwister;
 
