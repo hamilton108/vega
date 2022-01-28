@@ -35,7 +35,8 @@ public class BinarySearch {
         double result = fn.apply(mid);
         while (!isWithinTolerance(result,target,tolerance)) {
             if (counter >= maxIterations) {
-                throw new BinarySearchException(String.format("Max iterations (%d) reached", maxIterations));
+                throw new BinarySearchException(String.format("Max iterations (%d) reached. Last attempted value/result: %.4f/%.4f",
+                        maxIterations, mid, result));
             }
             if (result < target) {
                 lo = mid;

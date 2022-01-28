@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VER="2.0.0"
+VER="2.0.1"
 ARTIFACT="vega"
 
 mvn deploy:deploy-file -DgroupId=rcstadheim -DartifactId=${ARTIFACT} \
