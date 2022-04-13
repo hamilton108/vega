@@ -1,8 +1,8 @@
 package vega.financial.calculator;
 
-import static oahu.financial.StockOption.OptionType;
 import cern.jet.random.Normal;
 import cern.jet.random.engine.MersenneTwister;
+import vega.financial.StockOption.OptionType;
 
 public class DefaultOptionPricing implements OptionPricing {
 

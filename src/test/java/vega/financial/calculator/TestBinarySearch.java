@@ -1,11 +1,11 @@
 package vega.financial.calculator;
 
 import org.assertj.core.api.Assertions;
-import oahu.financial.StockOption;
 import org.assertj.core.data.Offset;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
+import vega.financial.StockOption.OptionType;
 
 @RunWith(SpringRunner.class)
 public class TestBinarySearch {
@@ -13,7 +13,7 @@ public class TestBinarySearch {
     @Test
     public void testFindBounds() {
         BinarySearch binarySearch = new BinarySearch();
-        OptionPricing pricing = new DefaultOptionPricing(StockOption.OptionType.CALL, 100, 100, 0.5);
+        OptionPricing pricing = new DefaultOptionPricing(OptionType.CALL, 100, 100, 0.5);
         BinarySearchBounds bounds = binarySearch.findBounds(pricing, 0.4, 12.0);
         Assertions.assertThat(bounds.getStart()).isCloseTo(0, Offset.offset(0.1));
         Assertions.assertThat(bounds.getEnd()).isCloseTo(0.4, Offset.offset(0.1));
@@ -23,7 +23,7 @@ public class TestBinarySearch {
     @Test
     public void testBinarySearchPut() {
         BinarySearch binarySearch = new BinarySearch();
-        OptionPricing pricing = new DefaultOptionPricing(StockOption.OptionType.PUT, 100, 100, 0.5);
+        OptionPricing pricing = new DefaultOptionPricing(OptionType.PUT, 100, 100, 0.5);
         double result = binarySearch.find(pricing,0.4, 12,0.1);
         Assertions.assertThat(result).isCloseTo(0.48, Offset.offset(0.1));
     }

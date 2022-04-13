@@ -1,11 +1,10 @@
 package vega.financial.calculator;
 
-import oahu.financial.StockOption;
-import oahu.financial.StockOptionPrice;
-import oahu.financial.OptionCalculator;
 import org.springframework.stereotype.Component;
+import vega.financial.StockOption;
+import vega.financial.StockOptionPrice;
 
-import static oahu.financial.StockOption.OptionType;
+import static vega.financial.StockOption.OptionType;
 
 @Component
 public class BlackScholes implements OptionCalculator {
@@ -29,11 +28,11 @@ public class BlackScholes implements OptionCalculator {
     @Override
     public double stockPriceFor(double optionPrice, StockOptionPrice o) {
         double result = 0;
-        if (o.getIvBuy().isPresent()) {
-            double iv = o.getIvBuy().get();
-            double x = o.getDerivative().getX();
-            double t = o.getDays() / daysInAYear;
-            OptionPricing pricing = new DefaultOptionPricing(o.getDerivative().getOpType());
+        if (o.ivBuy().isPresent()) {
+            double iv = o.ivBuy().get();
+            double x = o.getStockOption().getX();
+            double t = o.getStockOption().getDays() / daysInAYear;
+            OptionPricing pricing = new DefaultOptionPricing(o.getStockOption().getOpType());
             SpotFinder spotFinder = new SpotFinder(pricing,x,t,iv);
             double startValue = o.getStockPrice().getCls();
             BinarySearch binarySearch = new BinarySearch();
@@ -45,11 +44,11 @@ public class BlackScholes implements OptionCalculator {
     @Override
     public double iv(StockOptionPrice d, int priceType) {
         double price = priceType == StockOption.BUY ? d.getBuy() : d.getSell();
-        double tm = d.getDerivative().getDays() / daysInAYear;
+        double tm = d.getStockOption().getDays() / daysInAYear;
         OptionPricing fn = new DefaultOptionPricing(
-                d.getDerivative().getOpType(),
+                d.getStockOption().getOpType(),
                 d.getStockPrice().getCls(),
-                d.getDerivative().getX(),
+                d.getStockOption().getX(),
                 tm);
 
         BinarySearch binarySearch = new BinarySearch();
