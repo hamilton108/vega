@@ -93,9 +93,18 @@ public class BlackScholes implements OptionCalculator {
     }
 
     @Override
+    public double callPrice2(double spot, double strike, long days, double sigma) {
+        return callPrice(spot, strike, days/daysInAYear, sigma);
+    }
+
+    @Override
     public double putPrice(double spot, double strike, double yearsExpiry, double sigma) {
         OptionPricing optionPrice = new DefaultOptionPricing(OptionType.PUT);
         return optionPrice.apply(spot, strike, yearsExpiry, sigma);
+    }
+    @Override
+    public double putPrice2(double spot, double strike, long days, double sigma) {
+        return putPrice(spot, strike, days/daysInAYear, sigma);
     }
 
 }

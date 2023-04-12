@@ -24,5 +24,7 @@ public interface OptionCalculator {
     double ivCall(double spot, double strike, double yearsExpiry, double optionPrice);
     double ivPut(double spot, double strike, double yearsExpiry, double optionPrice);
     double callPrice(double spot, double strike, double yearsExpiry, double sigma);
+    double callPrice2(double spot, double strike, long days, double sigma);
     double putPrice(double spot, double strike, double yearsExpiry, double sigma);
+    double putPrice2(double spot, double strike, long days, double sigma);
 }
