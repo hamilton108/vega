@@ -2,18 +2,17 @@ package vega.financial.calculator;
 
 import org.assertj.core.api.Assertions;
 import org.assertj.core.data.Offset;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import static vega.financial.StockOption.OptionType.CALL;
 import static vega.financial.StockOption.OptionType.PUT;
 
-@RunWith(SpringRunner.class)
+@SpringBootTest
 public class TestBlackScholes {
 
     private BlackScholes blackScholes;
-    @Before
+    @BeforeAll
     public void init() {
         blackScholes = new BlackScholes();
     }

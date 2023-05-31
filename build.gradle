@@ -15,7 +15,7 @@ group = 'hamilton108'
 version = '3.0.0-SNAPSHOT'
 
 //sourceCompatibility = JavaVersion.VERSION_11
-sourceCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_17
 
 
 repositories {
