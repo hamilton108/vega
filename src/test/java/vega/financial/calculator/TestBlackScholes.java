@@ -2,17 +2,17 @@ package vega.financial.calculator;
 
 import org.assertj.core.api.Assertions;
 import org.assertj.core.data.Offset;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import static vega.financial.StockOption.OptionType.CALL;
-import static vega.financial.StockOption.OptionType.PUT;
+import vega.financial.StockOptionType;
 
-@SpringBootTest
+@SpringBootTest(classes = {vega.financial.calculator.BlackScholes.class})
 public class TestBlackScholes {
 
     private BlackScholes blackScholes;
-    @BeforeAll
+
+    @BeforeEach
     public void init() {
         blackScholes = new BlackScholes();
     }
@@ -28,9 +28,9 @@ public class TestBlackScholes {
     }
     @Test
     public void testStockPriceFor() {
-        double stockPrice = blackScholes.stockPriceFor2(CALL, 12.0, 100.0, 200, 0.2, 110);
+        double stockPrice = blackScholes.stockPriceFor2(StockOptionType.CALL, 12.0, 100.0, 200, 0.2, 110);
         Assertions.assertThat(stockPrice).isCloseTo(107.0, Offset.offset(0.5));
-        stockPrice = blackScholes.stockPriceFor2(PUT, 12.0, 100.0, 200, 0.2, 110);
+        stockPrice = blackScholes.stockPriceFor2(StockOptionType.PUT, 12.0, 100.0, 200, 0.2, 110);
         Assertions.assertThat(stockPrice).isCloseTo(88.0, Offset.offset(0.5));
 
     }

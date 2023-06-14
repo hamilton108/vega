@@ -5,7 +5,8 @@
 package vega.financial.calculator;
 
 import vega.financial.StockOptionPrice;
-import static vega.financial.StockOption.OptionType;
+import vega.financial.StockOptionType;
+
 
 public interface OptionCalculator {
 
@@ -13,7 +14,7 @@ public interface OptionCalculator {
     double spread(StockOptionPrice d);
     double breakEven(StockOptionPrice d);
     double stockPriceFor(double optionPrice, StockOptionPrice o);
-    double stockPriceFor2(OptionType optionType,
+    double stockPriceFor2(StockOptionType optionType,
                           double optionPrice,
                           double x,
                           long days,

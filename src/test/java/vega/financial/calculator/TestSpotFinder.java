@@ -5,22 +5,22 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import org.assertj.core.api.Assertions;
-import vega.financial.StockOption.OptionType;
+import vega.financial.StockOptionType;
 
-@SpringBootTest
+@SpringBootTest(classes = {vega.financial.calculator.DefaultOptionPricing.class})
 public class TestSpotFinder {
 
     @Test
     public void testSpotForCallPrice() {
-        testSpotFinder(OptionType.CALL, 107.53, "SpotFinder Call price");
+        testSpotFinder(StockOptionType.CALL, 107.53, "SpotFinder Call price");
     }
 
     @Test
     public void testSpotForPutPrice() {
-        testSpotFinder(OptionType.PUT, 88, "SpotFinder Put price");
+        testSpotFinder(StockOptionType.PUT, 88, "SpotFinder Put price");
     }
 
-    private void testSpotFinder(OptionType ot, double v, String msg) {
+    private void testSpotFinder(StockOptionType ot, double v, String msg) {
         OptionPricing optionPricing = new DefaultOptionPricing(ot);
         SpotFinder spotFinder = new SpotFinder(optionPricing,100,0.5,0.2);
         BinarySearch binarySearch = new BinarySearch();

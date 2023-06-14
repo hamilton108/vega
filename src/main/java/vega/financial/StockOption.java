@@ -12,11 +12,11 @@ public interface StockOption {
     public static int OPTYPE_UNDEF = 3;
     //*/
 
-    public static enum OptionType { CALL, PUT, UNDEF };
+    //public static enum OptionType { CALL, PUT, UNDEF };
 
     public static enum LifeCycle { FROM_HTML, SAVED_TO_DATABASE, FROM_DATABASE };
 
-    OptionType getOpType();
+    StockOptionType getOpType();
     double getX();
     long getDays();
 

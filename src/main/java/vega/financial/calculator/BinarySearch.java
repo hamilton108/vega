@@ -1,7 +1,9 @@
 package vega.financial.calculator;
 
 import oahu.exceptions.BinarySearchException;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BinarySearch {
     private final int maxIterations;
 

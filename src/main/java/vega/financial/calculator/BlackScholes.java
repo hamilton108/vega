@@ -3,8 +3,11 @@ package vega.financial.calculator;
 import org.springframework.stereotype.Component;
 import vega.financial.StockOption;
 import vega.financial.StockOptionPrice;
+import vega.financial.StockOptionType;
 
-import static vega.financial.StockOption.OptionType;
+import static vega.financial.StockOptionType.CALL;
+import static vega.financial.StockOptionType.PUT;
+
 
 @Component
 public class BlackScholes implements OptionCalculator {
@@ -42,7 +45,7 @@ public class BlackScholes implements OptionCalculator {
     }
 
     @Override
-    public double stockPriceFor2(OptionType optionType,
+    public double stockPriceFor2(StockOptionType optionType,
                                  double optionPrice,
                                  double x,
                                  long days,
@@ -75,20 +78,20 @@ public class BlackScholes implements OptionCalculator {
     @Override
     public double ivCall(double spot, double strike, double yearsExpiry, double optionPrice) {
         BinarySearch binarySearch = new BinarySearch();
-        OptionPricing fn = new DefaultOptionPricing(OptionType.CALL, spot, strike, yearsExpiry);
+        OptionPricing fn = new DefaultOptionPricing(CALL, spot, strike, yearsExpiry);
         return binarySearch.find(fn, 0.4, optionPrice, 0.05);
     }
 
     @Override
     public double ivPut(double spot, double strike, double yearsExpiry, double optionPrice) {
         BinarySearch binarySearch = new BinarySearch();
-        OptionPricing fn = new DefaultOptionPricing(OptionType.PUT, spot, strike, yearsExpiry);
+        OptionPricing fn = new DefaultOptionPricing(PUT, spot, strike, yearsExpiry);
         return binarySearch.find(fn, 0.4, optionPrice, 0.05);
     }
 
     @Override
     public double callPrice(double spot, double strike, double yearsExpiry, double sigma) {
-        OptionPricing optionPrice = new DefaultOptionPricing(OptionType.CALL);
+        OptionPricing optionPrice = new DefaultOptionPricing(CALL);
         return optionPrice.apply(spot, strike, yearsExpiry, sigma);
     }
 
@@ -99,7 +102,7 @@ public class BlackScholes implements OptionCalculator {
 
     @Override
     public double putPrice(double spot, double strike, double yearsExpiry, double sigma) {
-        OptionPricing optionPrice = new DefaultOptionPricing(OptionType.PUT);
+        OptionPricing optionPrice = new DefaultOptionPricing(PUT);
         return optionPrice.apply(spot, strike, yearsExpiry, sigma);
     }
     @Override
