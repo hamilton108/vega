@@ -1,4 +1,4 @@
-//*
+/*
 plugins {
     id 'org.springframework.boot' version '3.0.7'
 }
@@ -24,7 +24,6 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
-    implementation project(':oahu')
     implementation "colt:colt:$coltVersion"// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
     testImplementation "org.springframework.boot:spring-boot-starter-test"
 }

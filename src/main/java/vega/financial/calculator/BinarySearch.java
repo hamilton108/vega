@@ -1,7 +1,7 @@
 package vega.financial.calculator;
 
-import oahu.exceptions.BinarySearchException;
 import org.springframework.stereotype.Component;
+import vega.exception.BinarySearchException;
 
 @Component
 public class BinarySearch {

@@ -1,8 +1,8 @@
 package vega.filters.ehlers;
 
-import oahu.functional.Func5;
 import vega.filters.Common;
 import vega.filters.Filter;
+import vega.functional.Func5;
 
 import java.util.ArrayList;
 import java.util.List;
