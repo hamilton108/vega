@@ -1,17 +1,22 @@
 package vega.financial;
 
 public enum StockOptionType {
-    CALL("c"),
-    PUT("p"),
-    UNDEF("undef");
+    CALL(1, "c"),
+    PUT(2, "p"),
+    UNDEF(3, "undef");
 
     private final String value;
+    private final int index;
 
-    StockOptionType(String stockOptionType) {
-        this.value = stockOptionType;
+    StockOptionType(int index, String value) {
+        this.value = value;
+        this.index = index;
     }
 
     public String getValue() {
         return value;
+    }
+    public int getIndex() {
+        return index;
     }
 }
