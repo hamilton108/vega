@@ -31,8 +31,8 @@ public class BlackScholes implements OptionCalculator {
     @Override
     public double stockPriceFor(double optionPrice, StockOptionPrice o) {
         double result = 0;
-        if (o.ivBuy().isPresent()) {
-            double iv = o.ivBuy().get();
+        if (o.ivBid().isPresent()) {
+            double iv = o.ivBid().get();
             double x = o.getStockOption().getX();
             double t = o.getStockOption().getDays() / daysInAYear;
             OptionPricing pricing = new DefaultOptionPricing(o.getStockOption().getOpType());
@@ -63,7 +63,7 @@ public class BlackScholes implements OptionCalculator {
 
     @Override
     public double iv(StockOptionPrice d, int priceType) {
-        double price = priceType == StockOption.BUY ? d.getBuy() : d.getSell();
+        double price = priceType == StockOption.BUY ? d.getBid() : d.getAsk();
         double tm = d.getStockOption().getDays() / daysInAYear;
         OptionPricing fn = new DefaultOptionPricing(
                 d.getStockOption().getOpType(),
@@ -86,7 +86,7 @@ public class BlackScholes implements OptionCalculator {
     public double ivPut(double spot, double strike, double yearsExpiry, double optionPrice) {
         BinarySearch binarySearch = new BinarySearch();
         OptionPricing fn = new DefaultOptionPricing(PUT, spot, strike, yearsExpiry);
-        return binarySearch.find(fn, 0.4, optionPrice, 0.05);
+        return binarySearch.find(fn, 0.1, optionPrice, 0.05);
     }
 
     @Override

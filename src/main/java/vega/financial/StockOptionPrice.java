@@ -5,9 +5,9 @@ import java.util.Optional;
 public interface StockOptionPrice {
     StockOption getStockOption();
     StockPrice getStockPrice();
-    double getBuy();
-    double getSell();
-    Optional<Double> ivBuy();
+    double getBid();
+    double getAsk();
+    Optional<Double> ivBid();
 
     /*
     StockOption getDerivative();

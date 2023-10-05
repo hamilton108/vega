@@ -49,7 +49,8 @@ public class DefaultOptionPricing implements OptionPricing {
         double xp = Math.exp(t * (-interestRate));
         double a = spot * cdf1;
         double b =  x * xp * cdf2;
-        return optionType == StockOptionType.CALL ? a - b : Math.max(x - spot, b - a);
+        var result = optionType == StockOptionType.CALL ? a - b : Math.max(x - spot, b - a);
+        return result;
     }
 
     @Override
