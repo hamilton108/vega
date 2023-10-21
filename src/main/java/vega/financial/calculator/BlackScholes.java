@@ -9,7 +9,7 @@ import static vega.financial.StockOptionType.CALL;
 import static vega.financial.StockOptionType.PUT;
 
 
-@Component
+@Component("blackScholes")
 public class BlackScholes implements OptionCalculator {
     double daysInAYear = 365.0;
 
