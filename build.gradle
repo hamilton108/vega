@@ -8,8 +8,6 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'java'
 
-apply from: '../gradlecommon/spring-boot-deps.gradle'
-
 group = 'hamilton108'
 
 version = '3.0.0-SNAPSHOT'
@@ -24,7 +22,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
-    implementation "colt:colt:$coltVersion"// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    implementation "colt:colt:1.2.0" // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
     testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
 
